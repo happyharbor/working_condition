@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from operator import attrgetter
 
-from dto.work_setting import WorkSetting
+from workrate.dto.work_setting import WorkSetting
 
 
 @dataclass
@@ -11,13 +11,13 @@ class Settings:
     min_temperature: float
     max_temperature: float
 
-    def _min(self) -> float:
+    def __min(self) -> float:
         return min(self.work_settings, key=attrgetter('temperature')).temperature
 
-    def _max(self) -> float:
+    def __max(self) -> float:
         return max(self.work_settings, key=attrgetter('temperature')).temperature + 1
 
     def __init__(self, work_settings):
         self.work_settings = work_settings
-        self.min_temperature = self._min()
-        self.max_temperature = self._max()
+        self.min_temperature = self.__min()
+        self.max_temperature = self.__max()

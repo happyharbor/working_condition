@@ -1,10 +1,10 @@
 import csv
 import datetime
 
-from dto.environmental_variable import EnvironmentalVariable
+from workrate.dto.environmental_variable import EnvironmentalVariable
 
 
-def get_readings(path='../csvs/input.csv'):
+def get_readings(path='../resources/input.csv'):
     environmental_variables = []
     with open(path, newline='') as csvfile:
         environment_reader = csv.reader(csvfile, delimiter=';', quotechar='|')

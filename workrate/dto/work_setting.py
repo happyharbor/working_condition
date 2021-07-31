@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from dto.work_type import WorkType
+from workrate.dto.work_type import WorkType
 
 
 @dataclass
