@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import datetime as datetime
 
-from dto.work_condition import WorkCondition
+from workrate.dto.work_condition import WorkCondition
 
 
 @dataclass

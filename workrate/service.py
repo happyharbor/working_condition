@@ -1,22 +1,22 @@
-from dto.work_condition import WorkCondition
-from dto.work_time import WorkTime
-from dto.work_type import WorkType
-from readers.environment_reader import get_readings
-from readers.settings_reader import get_settings
+from workrate.dto.work_condition import WorkCondition
+from workrate.dto.work_time import WorkTime
+from workrate.dto.work_type import WorkType
+from workrate.readers.environment_reader import get_readings
+from workrate.readers.settings_reader import get_settings
 
 
-def main():
-    settings = get_settings('csvs/settings.csv')
+def calculate_workrate():
+    settings = get_settings('workrate/resources/settings.csv')
 
     work_times = []
-    for reading in get_readings('csvs/input.csv'):
+    for reading in get_readings('workrate/resources/input.csv'):
         for work_type in WorkType:
-            condition = _find_work_condition(settings, work_type, reading.temperature, reading.humidity)
+            condition = __find_work_condition(settings, work_type, reading.temperature, reading.humidity)
             work_times.append(WorkTime(reading.datetime, condition))
     print(work_times)
 
 
-def _find_work_condition(settings, work_type, temperature, humidity):
+def __find_work_condition(settings, work_type, temperature, humidity):
     if temperature < settings.min_temperature:
         return WorkCondition.CONTINUOUS
     if temperature > settings.max_temperature:
@@ -44,4 +44,4 @@ def _find_work_condition(settings, work_type, temperature, humidity):
 
 
 if __name__ == "__main__":
-    main()
+    calculate_workrate()
